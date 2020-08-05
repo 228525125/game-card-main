@@ -5,7 +5,7 @@ import org.cx.game.tools.JsonHelper;
 import java.util.List;
 
 import org.cx.game.card.dao.IStorageDao;
-import org.cx.game.card.domain.Storage;
+import org.cx.game.card.dao.domain.Storage;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.StorageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,7 @@ public class StorageController {
 	@RequestMapping(value="/import",method=RequestMethod.GET)
 	public ResponseEntity<?> importStorage(){
 		List<Storage> list = builder.getInstances();
+		//storageDao.deleteAll();
 		storageDao.saveAll(list);
 		ResponseEntity<?> responseEntity = getResponseEntity(list);
 		return responseEntity;
@@ -54,6 +55,7 @@ public class StorageController {
 	@RequestMapping(value="/findByAccount/{account}",method=RequestMethod.GET)
 	public ResponseEntity<?> findByAccount(@PathVariable String account){
 		Storage storage = storageDao.findByAccount(account);
+		if(null == storage) storage = createStorage(account);
 		ResponseEntity<?> responseEntity = getResponseEntity(storage);
 		return responseEntity;
 	}
@@ -71,5 +73,16 @@ public class StorageController {
 		
 		ResponseEntity<T> responseEntity = new ResponseEntity<T>(body, headers, HttpStatus.OK);
 		return responseEntity;
+	}
+	
+	private Storage createStorage(String account) {
+		Storage template = storageDao.findByAccount("DeckTemplate");
+		Storage storage = new Storage();
+		storage.setId(storageDao.count() + 1);
+		storage.setAccount(account);
+		storage.setHeroes(template.getHeroes());
+		storage.setNickName(template.getNickName());
+		storage = storageDao.save(storage);
+		return storage;
 	}
 }

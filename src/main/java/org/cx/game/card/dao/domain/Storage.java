@@ -1,4 +1,4 @@
-package org.cx.game.card.domain;
+package org.cx.game.card.dao.domain;
 
 import java.util.List;
 
@@ -13,16 +13,8 @@ public class Storage {
 
 	@Id
 	private Long id;
-	
 	private String account;
-	
-	private List<Deck> decks;
-	
-	public Deck getDefaultDeck() {
-		for(Deck deck : decks) {
-			if(deck.getSelected())
-				return deck;
-		}
-		return null;
-	}
+	private String nickName = "Visitor";
+	private List<Hero> heroes;
+	private Integer defaultHero = 0;
 }

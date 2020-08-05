@@ -1,6 +1,5 @@
-package org.cx.game.card.domain;
+package org.cx.game.card.dao.domain;
 
-import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
@@ -9,6 +8,5 @@ import lombok.Data;
 public class Deck {
 
 	private String name;
-	private Boolean selected;
 	private Map<Integer, Integer> cards;
 }

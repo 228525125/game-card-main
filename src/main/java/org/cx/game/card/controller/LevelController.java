@@ -4,10 +4,17 @@ import java.util.List;
 
 import org.cx.game.tools.JsonHelper;
 import org.cx.game.tools.Util;
+import org.cx.game.card.dao.ILandformEffectDao;
 import org.cx.game.card.dao.ILevelDao;
-import org.cx.game.card.domain.Deck;
-import org.cx.game.card.domain.Level;
+import org.cx.game.card.dao.domain.Deck;
+import org.cx.game.card.dao.domain.LandformEffect;
+import org.cx.game.card.dao.domain.Level;
+import org.cx.game.card.dao.domain.Storage;
 import org.cx.game.card.exception.DataException;
+import org.cx.game.card.service.LevelPlayService;
+import org.cx.game.card.tools.LandformEffectBuilder;
+import org.cx.game.card.tools.LevelBuilder;
+import org.cx.game.card.tools.StorageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,7 +38,22 @@ public class LevelController {
 	private JsonHelper jsonHelper;
 	
 	@Autowired
+	private LevelBuilder levelBuilder;	
+	
+	@Autowired
+	private LevelPlayService playService;
+	
+	@Autowired
 	private ILevelDao levelDao;
+	
+	@RequestMapping(value="/import",method=RequestMethod.GET)
+	public ResponseEntity<?> importLevel(){
+		List<Level> list = levelBuilder.getInstances();
+		levelDao.deleteAll();
+		levelDao.saveAll(list);
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> save(@RequestBody Level item){
@@ -59,6 +81,21 @@ public class LevelController {
 	public ResponseEntity<?> findItemTypeById(@PathVariable Long id){
 		Level item = levelDao.findById(id).get();
 		ResponseEntity<?> responseEntity = getResponseEntity(item);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/enter",method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> enter(@RequestBody CreateLevelHostParameters parameter){
+		String hostName = "level";
+		Level level = levelDao.findById(parameter.getLevelId()).get();
+		Integer nop = level.getPopulation(); 
+		
+		String cmdStr = "create " + parameter.getAccount() + " " +hostName+" "+nop;
+		
+		ResponseEntity<?> response = playService.connect(cmdStr);
+		Connect conn = (Connect) response.getBody();
+		
+		ResponseEntity<?> responseEntity = getResponseEntity(conn);
 		return responseEntity;
 	}
 	

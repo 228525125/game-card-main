@@ -4,11 +4,10 @@ import org.cx.game.filter.UserContextHolder;
 import org.cx.game.pojo.User;
 import org.cx.game.tools.Logger;
 import org.cx.game.card.dao.IStorageDao;
-import org.cx.game.card.domain.Storage;
+import org.cx.game.card.dao.domain.Storage;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.exception.LoginException;
 import org.cx.game.card.service.UserService;
-import org.cx.game.card.tools.ServiceProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,9 +32,6 @@ public class UserController {
 	
 	@Autowired
 	private IStorageDao storageDao;
-	
-	@Autowired
-	private ServiceProperties properties;
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> Login(@RequestBody User param) {

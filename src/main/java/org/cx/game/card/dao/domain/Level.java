@@ -1,5 +1,9 @@
-package org.cx.game.card.domain;
+package org.cx.game.card.dao.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.cx.game.arithmetic.Point;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,6 +15,7 @@ public class Level {
 
 	@Id
 	private Long id;
-	
 	private String name;
+	private Integer population;
+	private List<Ground> grounds;
 }
