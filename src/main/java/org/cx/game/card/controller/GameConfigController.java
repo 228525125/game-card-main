@@ -6,12 +6,14 @@ import java.util.List;
 import org.cx.game.card.config.GameConfig;
 import org.cx.game.card.dao.IMessageDao;
 import org.cx.game.card.dao.IPreloadDao;
+import org.cx.game.card.dao.ITagHelperDao;
 import org.cx.game.card.dao.ITerritoryDao;
 import org.cx.game.card.dao.ILandformEffectDao;
 import org.cx.game.card.dao.ILevelDao;
 import org.cx.game.card.dao.IManualDao;
 import org.cx.game.card.dao.domain.Message;
 import org.cx.game.card.dao.domain.Preload;
+import org.cx.game.card.dao.domain.TagHelper;
 import org.cx.game.card.dao.domain.Territory;
 import org.cx.game.card.dao.domain.LandformEffect;
 import org.cx.game.card.dao.domain.Level;
@@ -19,8 +21,8 @@ import org.cx.game.card.dao.domain.Manual;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.MessageBuilder;
 import org.cx.game.card.tools.PreloadBuilder;
+import org.cx.game.card.tools.TagHelperBuilder;
 import org.cx.game.card.tools.TerritoryBuilder;
-import org.cx.game.tag.TagHelper;
 import org.cx.game.card.tools.LandformEffectBuilder;
 import org.cx.game.card.tools.LevelBuilder;
 import org.cx.game.card.tools.ManualBuilder;
@@ -81,7 +83,10 @@ public class GameConfigController {
 	private PreloadBuilder preloadBuilder;
 	
 	@Autowired
-	private TagHelper tagHelper;
+	private TagHelperBuilder tagHelperBuilder;
+	
+	@Autowired
+	private ITagHelperDao tagHelperDao; 
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> get(){
@@ -212,8 +217,18 @@ public class GameConfigController {
 		return responseEntity;
 	}
 	
+	@RequestMapping(value="/TagHelper/import",method=RequestMethod.GET)
+	public ResponseEntity<?> importTagHelper(){
+		TagHelper tagHelper = tagHelperBuilder.getInstance();
+		tagHelperDao.deleteAll();
+		tagHelperDao.save(tagHelper);
+		ResponseEntity<?> responseEntity = getResponseEntity(tagHelper);
+		return responseEntity;
+	}
+	
 	@RequestMapping(value="/TagHelper",method=RequestMethod.GET)
 	public ResponseEntity<?> getTagHelper(){
+		TagHelper tagHelper = tagHelperDao.findById(1l).get();
 		ResponseEntity<?> responseEntity = getResponseEntity(tagHelper);
 		return responseEntity;
 	}

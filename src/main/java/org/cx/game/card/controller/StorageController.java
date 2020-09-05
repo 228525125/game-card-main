@@ -81,7 +81,12 @@ public class StorageController {
 		storage.setId(storageDao.count() + 1);
 		storage.setAccount(account);
 		storage.setHeroes(template.getHeroes());
+		storage.setCards(template.getCards());
+		storage.setItems(template.getItems());
 		storage.setNickName(template.getNickName());
+		storage.setDefaultHero(template.getDefaultHero());
+		storage.setSelectedItem(template.getSelectedItem());
+		storage.setNpcList(template.getNpcList());
 		storage = storageDao.save(storage);
 		return storage;
 	}
