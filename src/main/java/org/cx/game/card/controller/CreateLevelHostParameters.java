@@ -1,7 +1,7 @@
 package org.cx.game.card.controller;
 
-import org.cx.game.card.dao.domain.Level;
 import org.cx.game.card.dao.domain.Storage;
+import org.cx.game.card.dao.domain.level.Level;
 
 import lombok.Data;
 

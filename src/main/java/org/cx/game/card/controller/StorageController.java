@@ -2,10 +2,12 @@ package org.cx.game.card.controller;
 
 import org.cx.game.tools.JsonHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.card.dao.IStorageDao;
 import org.cx.game.card.dao.domain.Storage;
+import org.cx.game.card.dao.domain.story.Story;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.StorageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +84,8 @@ public class StorageController {
 		storage.setAccount(account);
 		storage.setHeroes(template.getHeroes());
 		storage.setCards(template.getCards());
-		storage.setItems(template.getItems());
 		storage.setNickName(template.getNickName());
 		storage.setDefaultHero(template.getDefaultHero());
-		storage.setSelectedItem(template.getSelectedItem());
 		storage.setNpcList(template.getNpcList());
 		storage = storageDao.save(storage);
 		return storage;

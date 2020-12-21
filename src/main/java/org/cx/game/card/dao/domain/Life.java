@@ -9,12 +9,10 @@ import lombok.Data;
 
 @Data
 @Document
-public class Item extends MapBuilder {
-	
+public class Life extends MapBuilder {
+
 	@Id
 	private Long id;
 	private String name;
-	private Integer price;
-	private Integer amount = 1;
 	private Point point;
 }

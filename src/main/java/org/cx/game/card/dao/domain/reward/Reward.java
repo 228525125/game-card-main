@@ -1,5 +1,6 @@
-package org.cx.game.card.dao.domain;
+package org.cx.game.card.dao.domain.reward;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -9,9 +10,10 @@ import lombok.Data;
 
 @Data
 @Document
-public class Manual {
+public class Reward {
 
 	@Id
 	private Long id;
-	private Map<String, String> properties;
+	private List<Formula> formulas;
+	
 }

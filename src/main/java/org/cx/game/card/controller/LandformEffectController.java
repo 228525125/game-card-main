@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.cx.game.card.dao.ILandformEffectDao;
 import org.cx.game.card.dao.domain.LandformEffect;
-import org.cx.game.card.dao.domain.Level;
+import org.cx.game.card.dao.domain.level.Level;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.LandformEffectBuilder;
 import org.cx.game.utils.Error;

@@ -11,11 +11,14 @@ import org.cx.game.tools.IListFilter;
 import org.cx.game.tools.ListUtils;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
+@Document
 public class TagHelper implements Serializable {
 	
 	
@@ -24,6 +27,7 @@ public class TagHelper implements Serializable {
 	public final static Integer Category_Fashugongneng = 1005;
 	public final static Integer Category_Zhiye = 1006;
 	
+	@Id
 	private Long id = 1l;
 	
 	private Map<Integer,Integer> tagCategoryMap = new HashMap<Integer,Integer>();

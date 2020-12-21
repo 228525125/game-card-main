@@ -48,7 +48,8 @@ public abstract class Builder<T> {
 	
 	public List<Element> getElements(){
 		List<Element> list = new ArrayList<Element>();
-		Element root = xh.getRoot(getPath());
+		String path = getPath();
+		Element root = xh.getRoot(path);
 		
 		for(Iterator it = root.elementIterator(getClassName());it.hasNext();){
 			list.add((Element) it.next());

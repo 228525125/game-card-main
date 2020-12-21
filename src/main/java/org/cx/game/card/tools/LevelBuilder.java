@@ -8,7 +8,7 @@ import org.cx.game.builder.ObjectTypeBuilder;
 import org.cx.game.builder.ObjectTypeParse;
 import org.cx.game.builder.exception.BuilderException;
 import org.cx.game.builder.exception.ParseException;
-import org.cx.game.card.dao.domain.Level;
+import org.cx.game.card.dao.domain.level.Level;
 import org.cx.game.card.service.Builder;
 import org.cx.game.tools.IXmlHelper;
 import org.cx.game.tools.XmlUtil;

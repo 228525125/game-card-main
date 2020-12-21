@@ -1,12 +1,10 @@
-package org.cx.game.card.dao.domain;
+package org.cx.game.card.dao.domain.story;
 
 import lombok.Data;
 
 @Data
-public abstract class MapBuilder {
+public abstract class StoryRequirement {
 
-	private Long id;
-	
 	public String getOtype() {
 		return this.getClass().getName();
 	}
