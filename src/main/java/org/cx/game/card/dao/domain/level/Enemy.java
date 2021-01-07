@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Enemy extends Life {
 
-	private Integer num;
-	private Integer interval;
+	private Integer num = 0;
+	private Integer interval = 0;
 	
 }

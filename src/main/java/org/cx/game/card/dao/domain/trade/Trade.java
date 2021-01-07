@@ -1,4 +1,4 @@
-package org.cx.game.card.dao.domain.level;
+package org.cx.game.card.dao.domain.trade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,10 @@ import lombok.Data;
 
 @Data
 @Document
-public class Territory {
+public class Trade {
 
 	@Id
 	private Long id;
-	private String name;
-	private List<Long> levels = new ArrayList<Long>();
-	private List<Level> levelList = new ArrayList<Level>();
+	private Long pedlar;      //商贩
+	private List<Commodity> commodities = new ArrayList<Commodity>();
 }

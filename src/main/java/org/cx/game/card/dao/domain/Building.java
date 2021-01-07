@@ -1,18 +1,17 @@
 package org.cx.game.card.dao.domain;
 
 import org.cx.game.arithmetic.Point;
-import org.cx.game.card.dao.domain.level.MapBuilder;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.cx.game.card.dao.domain.level.Entrance;
+import org.cx.game.card.dao.domain.level.LevelObject;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import lombok.Data;
 
 @Data
-@Document
-public class Building extends MapBuilder {
+public class Building extends LevelObject {
 
-	@Id
-	private Long id;
-	private String name;
-	private Point point;
 }

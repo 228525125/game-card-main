@@ -19,6 +19,7 @@ public class Storage {
 	private String account;
 	private String nickName = "Visitor";
 	private List<Hero> heroes;
+	private List<Long> heroList;
 	private Long defaultHero = 1011001l;
 	private Map<Integer, Integer> cards;
 	private List<Long> npcList;

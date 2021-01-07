@@ -12,6 +12,7 @@ import org.cx.game.card.dao.IRewardDao;
 import org.cx.game.card.dao.ITagHelperDao;
 import org.cx.game.card.dao.IStoryDao;
 import org.cx.game.card.dao.ITerritoryDao;
+import org.cx.game.card.dao.ITradeDao;
 import org.cx.game.card.dao.ILandformEffectDao;
 import org.cx.game.card.dao.ILevelDao;
 import org.cx.game.card.dao.ILifeDao;
@@ -23,6 +24,7 @@ import org.cx.game.card.dao.domain.level.Level;
 import org.cx.game.card.dao.domain.level.Territory;
 import org.cx.game.card.dao.domain.reward.Reward;
 import org.cx.game.card.dao.domain.story.Story;
+import org.cx.game.card.dao.domain.trade.Trade;
 import org.cx.game.card.dao.domain.Building;
 import org.cx.game.card.dao.domain.Item;
 import org.cx.game.card.dao.domain.LandformEffect;
@@ -37,6 +39,7 @@ import org.cx.game.card.tools.RewardBuilder;
 import org.cx.game.card.tools.TagHelperBuilder;
 import org.cx.game.card.tools.StoryBuilder;
 import org.cx.game.card.tools.TerritoryBuilder;
+import org.cx.game.card.tools.TradeBuilder;
 import org.cx.game.card.tools.LandformEffectBuilder;
 import org.cx.game.card.tools.LevelBuilder;
 import org.cx.game.card.tools.LifeBuilder;
@@ -132,6 +135,12 @@ public class GameConfigController {
 	
 	@Autowired
 	private IBuildingDao buildingDao;
+	
+	@Autowired
+	private TradeBuilder tradeBuilder;
+	
+	@Autowired
+	private ITradeDao tradeDao;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> get(){
@@ -404,6 +413,29 @@ public class GameConfigController {
 	@RequestMapping(value="/Building/findById/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?> findBuildingById(@PathVariable Long id){
 		Building item = buildingDao.findById(id).get();
+		ResponseEntity<?> responseEntity = getResponseEntity(item);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Trade/import",method=RequestMethod.GET)
+	public ResponseEntity<?> importTrade(){
+		List<Trade> list = tradeBuilder.getInstances();
+		tradeDao.deleteAll();
+		tradeDao.saveAll(list);
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Trade/findAll",method=RequestMethod.GET)
+	public ResponseEntity<?> findAllTrade(){
+		List<Trade> list = tradeDao.findAll(); 
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Trade/findById/{id}",method=RequestMethod.GET)
+	public ResponseEntity<?> findTradeById(@PathVariable Long id){
+		Trade item = tradeDao.findById(id).get();
 		ResponseEntity<?> responseEntity = getResponseEntity(item);
 		return responseEntity;
 	}

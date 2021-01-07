@@ -1,5 +1,7 @@
 package org.cx.game.card.dao.domain.story;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +17,12 @@ public class Story {
 	@Id
 	private Long id;
 	private String language;
-	private String type;
+	private Integer type = 0;
 	private String title;
-	private Long publisher;
-	private List<StoryRequirement> requirements;
-	private Map<Integer, Map<Integer, String>> content;
+	private Long publisher = 0l;
+	private List<StoryRequirement> requirements = new ArrayList<StoryRequirement>();
+	private Map<Integer, Map<Integer, String>> content = new HashMap<Integer, Map<Integer, String>>();
 	private Boolean completed = false;
 	private Integer doing = 1;
-	private Map<Integer, StoryAction> actions;
+	private Map<Integer, StoryAction> actions = new HashMap<Integer, StoryAction>();
 }

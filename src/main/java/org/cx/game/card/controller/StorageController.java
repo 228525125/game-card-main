@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.card.dao.IStorageDao;
+import org.cx.game.card.dao.IStoryDao;
+import org.cx.game.card.dao.domain.Hero;
 import org.cx.game.card.dao.domain.Storage;
 import org.cx.game.card.dao.domain.story.Story;
 import org.cx.game.card.exception.DataException;
@@ -38,6 +40,9 @@ public class StorageController {
 	@Autowired
 	private IStorageDao storageDao;
 	
+	@Autowired
+	private IStoryDao storyDao;
+	
 	@RequestMapping(value="/import",method=RequestMethod.GET)
 	public ResponseEntity<?> importStorage(){
 		List<Storage> list = builder.getInstances();
@@ -57,7 +62,7 @@ public class StorageController {
 	@RequestMapping(value="/findByAccount/{account}",method=RequestMethod.GET)
 	public ResponseEntity<?> findByAccount(@PathVariable String account){
 		Storage storage = storageDao.findByAccount(account);
-		if(null == storage) storage = createStorage(account);
+		//if(null == storage) storage = createStorage(account);
 		ResponseEntity<?> responseEntity = getResponseEntity(storage);
 		return responseEntity;
 	}
@@ -82,7 +87,10 @@ public class StorageController {
 		Storage storage = new Storage();
 		storage.setId(storageDao.count() + 1);
 		storage.setAccount(account);
-		storage.setHeroes(template.getHeroes());
+		List<Hero> heroes = template.getHeroes();
+		/*for(Hero hero : heroes)
+			hero.getStories().addAll(storyDao.findAllByType(2));*/
+		storage.setHeroes(heroes);
 		storage.setCards(template.getCards());
 		storage.setNickName(template.getNickName());
 		storage.setDefaultHero(template.getDefaultHero());
