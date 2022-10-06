@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.cx.game.card.dao.IStorageDao;
 import org.cx.game.card.dao.IStoryDao;
-import org.cx.game.card.dao.domain.Hero;
 import org.cx.game.card.dao.domain.Storage;
+import org.cx.game.card.dao.domain.level.life.Hero;
 import org.cx.game.card.dao.domain.story.Story;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.StorageBuilder;
@@ -87,13 +87,13 @@ public class StorageController {
 		Storage storage = new Storage();
 		storage.setId(storageDao.count() + 1);
 		storage.setAccount(account);
-		List<Hero> heroes = template.getHeroes();
+		//List<Hero> heroes = template.getHeroes();
 		/*for(Hero hero : heroes)
 			hero.getStories().addAll(storyDao.findAllByType(2));*/
-		storage.setHeroes(heroes);
+		//storage.setHeroes(heroes);
 		storage.setCards(template.getCards());
 		storage.setNickName(template.getNickName());
-		storage.setDefaultHero(template.getDefaultHero());
+		//storage.setDefaultHero(template.getDefaultHero());
 		storage.setNpcList(template.getNpcList());
 		storage = storageDao.save(storage);
 		return storage;

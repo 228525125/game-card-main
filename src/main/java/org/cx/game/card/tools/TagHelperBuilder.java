@@ -26,6 +26,11 @@ public class TagHelperBuilder {
 	
 	public TagHelper getInstance() {
 		// TODO Auto-generated method stub
+		tagCategoryMap.clear();
+		categoryTagMap.clear();
+		objectTagMap.clear();
+		tagObjectMap.clear();
+		
 		Element tags = xh.getRoot("tag.path").element("tags");
 		for(Iterator it = tags.elementIterator("category");it.hasNext();){
 			Element category = (Element) it.next();

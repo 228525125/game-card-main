@@ -1,7 +1,6 @@
-package org.cx.game.card.dao.domain.level;
+package org.cx.game.card.dao.domain.level.building;
 
 import org.cx.game.arithmetic.Point;
-import org.cx.game.card.dao.domain.Building;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

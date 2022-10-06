@@ -1,6 +1,6 @@
 package org.cx.game.card.dao.domain.trade;
 
-import org.cx.game.card.dao.domain.Item;
+import org.cx.game.card.dao.domain.level.item.Item;
 
 import lombok.Data;
 

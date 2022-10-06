@@ -1,7 +1,6 @@
-package org.cx.game.card.dao.domain.level;
+package org.cx.game.card.dao.domain.level.life;
 
 import org.cx.game.arithmetic.Point;
-import org.cx.game.card.dao.domain.Life;
 
 import lombok.Data;
 

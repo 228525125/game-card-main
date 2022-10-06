@@ -1,6 +1,4 @@
-package org.cx.game.card.dao.domain.level;
-
-import org.cx.game.card.dao.domain.Building;
+package org.cx.game.card.dao.domain.level.building;
 
 import lombok.Data;
 

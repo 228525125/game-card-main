@@ -8,8 +8,10 @@ import org.cx.game.card.dao.IMessageDao;
 import org.cx.game.card.dao.IPreloadDao;
 import org.cx.game.card.dao.IBuildingDao;
 import org.cx.game.card.dao.IItemDao;
+import org.cx.game.card.dao.IKeywordDao;
 import org.cx.game.card.dao.IRewardDao;
 import org.cx.game.card.dao.ITagHelperDao;
+import org.cx.game.card.dao.ITalentDao;
 import org.cx.game.card.dao.IStoryDao;
 import org.cx.game.card.dao.ITerritoryDao;
 import org.cx.game.card.dao.ITradeDao;
@@ -22,21 +24,25 @@ import org.cx.game.card.dao.domain.Preload;
 import org.cx.game.card.dao.domain.TagHelper;
 import org.cx.game.card.dao.domain.level.Level;
 import org.cx.game.card.dao.domain.level.Territory;
+import org.cx.game.card.dao.domain.level.building.Building;
+import org.cx.game.card.dao.domain.level.item.Item;
+import org.cx.game.card.dao.domain.level.life.Life;
 import org.cx.game.card.dao.domain.reward.Reward;
 import org.cx.game.card.dao.domain.story.Story;
+import org.cx.game.card.dao.domain.talent.Talent;
 import org.cx.game.card.dao.domain.trade.Trade;
-import org.cx.game.card.dao.domain.Building;
-import org.cx.game.card.dao.domain.Item;
+import org.cx.game.card.dao.domain.Keyword;
 import org.cx.game.card.dao.domain.LandformEffect;
-import org.cx.game.card.dao.domain.Life;
 import org.cx.game.card.dao.domain.Manual;
 import org.cx.game.card.exception.DataException;
 import org.cx.game.card.tools.MessageBuilder;
 import org.cx.game.card.tools.PreloadBuilder;
 import org.cx.game.card.tools.BuildingBuilder;
 import org.cx.game.card.tools.ItemBuilder;
+import org.cx.game.card.tools.KeywordBuilder;
 import org.cx.game.card.tools.RewardBuilder;
 import org.cx.game.card.tools.TagHelperBuilder;
+import org.cx.game.card.tools.TalentBuilder;
 import org.cx.game.card.tools.StoryBuilder;
 import org.cx.game.card.tools.TerritoryBuilder;
 import org.cx.game.card.tools.TradeBuilder;
@@ -83,6 +89,12 @@ public class GameConfigController {
 	private IStoryDao storyDao;
 	
 	@Autowired
+	private TalentBuilder talentBuilder;
+	
+	@Autowired
+	private ITalentDao talentDao;
+	
+	@Autowired
 	private RewardBuilder rewardBuilder;
 	
 	@Autowired
@@ -104,7 +116,13 @@ public class GameConfigController {
 	private IManualDao manualDao;
 	
 	@Autowired
+	private IKeywordDao keywordDao;
+	
+	@Autowired
 	private ManualBuilder manualBuilder;
+	
+	@Autowired
+	private KeywordBuilder keywordBuilder;
 	
 	@Autowired
 	private IPreloadDao preloadDao;
@@ -217,6 +235,29 @@ public class GameConfigController {
 		return responseEntity;
 	}
 	
+	@RequestMapping(value="/Talent/import",method=RequestMethod.GET)
+	public ResponseEntity<?> importTalent(){
+		List<Talent> list = talentBuilder.getInstances();
+		talentDao.deleteAll();
+		talentDao.saveAll(list);
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Talent/findAll",method=RequestMethod.GET)
+	public ResponseEntity<?> findAllTalent(){
+		List<Talent> list = talentDao.findAll(); 
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Talent/findById/{id}",method=RequestMethod.GET)
+	public ResponseEntity<?> findTalentById(@PathVariable Long id){
+		Talent item = talentDao.findById(id).get();
+		ResponseEntity<?> responseEntity = getResponseEntity(item);
+		return responseEntity;
+	}
+	
 	@RequestMapping(value="/Reward/import",method=RequestMethod.GET)
 	public ResponseEntity<?> importReward(){
 		List<Reward> list = rewardBuilder.getInstances();
@@ -305,6 +346,29 @@ public class GameConfigController {
 	@RequestMapping(value="/Manual/findById/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?> findManualById(@PathVariable Long id){
 		Manual item = manualDao.findById(id).get();
+		ResponseEntity<?> responseEntity = getResponseEntity(item);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Keyword/import",method=RequestMethod.GET)
+	public ResponseEntity<?> importKeyword(){
+		List<Keyword> list = keywordBuilder.getInstances();
+		keywordDao.deleteAll();
+		keywordDao.saveAll(list);
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Keyword/findAll",method=RequestMethod.GET)
+	public ResponseEntity<?> findAllKeyword(){
+		List<Keyword> list = keywordDao.findAll(); 
+		ResponseEntity<?> responseEntity = getResponseEntity(list);
+		return responseEntity;
+	}
+	
+	@RequestMapping(value="/Keyword/findById/{id}",method=RequestMethod.GET)
+	public ResponseEntity<?> findKeywordById(@PathVariable Long id){
+		Keyword item = keywordDao.findById(id).get();
 		ResponseEntity<?> responseEntity = getResponseEntity(item);
 		return responseEntity;
 	}

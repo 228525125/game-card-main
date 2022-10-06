@@ -1,5 +1,6 @@
 package org.cx.game.card.dao.domain;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
@@ -8,5 +9,6 @@ import lombok.Data;
 public class Deck {
 
 	private String name;
-	private Map<Integer, Integer> cards;
+	private List<CardItem> cards;
+	private Integer type = 0;
 }

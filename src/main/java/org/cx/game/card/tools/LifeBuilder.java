@@ -1,6 +1,6 @@
 package org.cx.game.card.tools;
 
-import org.cx.game.card.dao.domain.Life;
+import org.cx.game.card.dao.domain.level.life.Life;
 import org.cx.game.card.service.Builder;
 import org.cx.game.tools.IXmlHelper;
 import org.springframework.beans.factory.annotation.Autowired;

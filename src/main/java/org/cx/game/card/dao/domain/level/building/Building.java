@@ -1,7 +1,6 @@
-package org.cx.game.card.dao.domain;
+package org.cx.game.card.dao.domain.level.building;
 
 import org.cx.game.arithmetic.Point;
-import org.cx.game.card.dao.domain.level.Entrance;
 import org.cx.game.card.dao.domain.level.LevelObject;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -14,4 +13,5 @@ import lombok.Data;
 @Data
 public class Building extends LevelObject {
 
+	private Boolean discover = false;
 }

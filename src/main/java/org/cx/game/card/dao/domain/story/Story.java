@@ -16,9 +16,9 @@ public class Story {
 
 	@Id
 	private Long id;
-	private String language;
-	private Integer type = 0;
-	private String title;
+	private String language = "zh_CN";
+	private Integer type = 3;
+	private String title = "挑战";
 	private Long publisher = 0l;
 	private List<StoryRequirement> requirements = new ArrayList<StoryRequirement>();
 	private Map<Integer, Map<Integer, String>> content = new HashMap<Integer, Map<Integer, String>>();

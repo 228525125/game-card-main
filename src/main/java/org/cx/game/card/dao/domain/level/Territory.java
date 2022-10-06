@@ -3,6 +3,7 @@ package org.cx.game.card.dao.domain.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.card.dao.domain.level.life.Hero;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
